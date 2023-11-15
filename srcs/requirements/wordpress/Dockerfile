@@ -27,6 +27,8 @@ RUN curl -o wordpress.tar.gz -fSL "https://wordpress.org/latest.tar.gz" \
 COPY php.conf /etc/php81/php-fpm.d/www.conf
 RUN echo "clear_env = no" >> /etc/php81/php-fpm.conf
 COPY docker_entrypoint.sh /usr/local/bin/
+COPY install_wp.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/install_wp.sh
 RUN chmod +x /usr/local/bin/docker_entrypoint.sh
 ENTRYPOINT ["docker_entrypoint.sh"]
 CMD ["php-fpm", "-F"]
