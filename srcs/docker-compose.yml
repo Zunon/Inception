@@ -2,7 +2,7 @@ version: '3'
 
 services:
   webserver:
-    build: ./nginx
+    build: ./requirements/nginx
     depends_on:
       - wordpress
     ports:
@@ -10,10 +10,10 @@ services:
     networks:
       - totem
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress_data:/var/www/
 
   wordpress:
-    build: ./wordpress
+    build: ./requirements/wordpress
     depends_on:
       - mariadb
     environment:
@@ -24,10 +24,10 @@ services:
     networks:
       - totem
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress_data:/var/www/
 
   mariadb:
-    build: ./mariadb
+    build: ./requirements/mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
